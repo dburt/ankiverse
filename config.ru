@@ -1,0 +1,2 @@
+require 'ankiverse'
+run AnkiVerse
