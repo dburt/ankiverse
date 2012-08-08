@@ -3,13 +3,14 @@
 Ankiverse is a simple web app that breaks lines of text into Anki cards in CSV
 format in the following form:
 
-Line 1
-Line 2
-Line 3
-Line 4
----
-Line 5
-Line 6
+> Line 1  
+> Line 2  
+> Line 3  
+> Line 4  
+>
+> ------  
+> Line 5  
+> Line 6
 
 This means the prompt for each line is its immediate context, and also provides
 overlap between memorized lines.
