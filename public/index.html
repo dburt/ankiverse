@@ -1,13 +1,41 @@
 <html>
 <head>
 <title>AnkiVerse</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>
+$(function() {
+  $('#add_field').click(function() {
+    $(this).before( $(this).siblings('.other_field:last').clone() );
+    $('.other_field:last input').val("");
+  });
+});
+</script>
+<style>
+  td { vertical-align: top; }
+</style>
 </head>
 <body>
 <h1>AnkiVerse</h1>
 <h2>Memorise poetry with Anki</h2>
 <form method="post">
-  Input poem: <br/>
-  <textarea name="poem" cols="40" rows="20"></textarea> <br/>
+  
+  <table>
+  <tr>
+
+  <td>
+  Input poem: <br />
+  <textarea name="poem" cols="40" rows="20"></textarea>
+  </td>
+
+  <td>
+  Other fields (tags, etc.): <br />
+  <div class="other_field"><input type="text" name="other_fields[]" /></div>
+  <a href="javascript:" id="add_field">Add</a><br />
+  </td>
+
+  </tr>
+  </table>
+
   <input type="submit" value="Get Anki Cards" />
 </form>
 </body>
