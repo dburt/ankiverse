@@ -8,10 +8,17 @@ $(function() {
     $(this).before( $(this).siblings('.other_field:last').clone() );
     $('.other_field:last input').val("");
   });
+  $('#bible_form').submit(function() {
+    if ($('#passage').val()) {
+      document.location = "/bible/" + $('#passage').val();
+    }
+    return false;
+  });
 });
 </script>
 <style>
   td { vertical-align: top; }
+  #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
 </style>
 </head>
 <body>
@@ -38,5 +45,11 @@ $(function() {
 
   <input type="submit" value="Get Anki Cards" />
 </form>
+
+<form action="bible" id="bible_form">
+<input type="text" id="passage" name="passage" value="Psalm 23" />
+<input type="submit" value="Get Bible passage" />
+</form>
+
 </body>
 </html>

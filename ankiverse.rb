@@ -6,6 +6,9 @@ require 'fastercsv'
 require 'iconv'
 require 'yaml'
 
+require './esv_api_request'
+require './sentence_splitter'
+
 class AnkiVerse < Sinatra::Base
 
   #get '/' do
@@ -14,15 +17,15 @@ class AnkiVerse < Sinatra::Base
 
   post '/' do
 
-    next request.params.to_yaml if request.params["debug"]
+    next params.to_yaml if params["debug"]
 
     iconv = Iconv.new('UTF-8', 'WINDOWS-1252')
-    lines = request.params["poem"].to_s.strip.split(/\r?\n/)
+    lines = params["poem"].to_s.strip.split(/\r?\n/)
     lines.map! do |line|
       iconv.iconv line.strip
     end
 
-    other_fields = request.params["other_fields"]
+    other_fields = params["other_fields"]
     other_fields = [] unless other_fields.kind_of? Array
     other_fields.delete_if {|field| field.to_s == "" }
 
@@ -39,6 +42,31 @@ class AnkiVerse < Sinatra::Base
       end
     end
 
+  end
+
+  get '/bible/:passage' do
+    options = {
+      :key => "TEST",
+      :output_format => "plain-text",
+      :line_length => 0,
+      :dont_include => %w(
+        passage-references
+        first-verse-numbers
+        verse-numbers
+        footnotes
+        footnote-links
+        headings
+        subheadings
+        audio-link
+        short-copyright
+        passage-horizontal-lines
+        heading-horizontal-lines
+      )
+    }
+    response = EsvApiRequest.execute(:passageQuery,
+      options.merge(:passage => params[:passage]))
+    content_type "text/plain"
+    SentenceSplitter.new(response).lines_of(5..12).join("\n")
   end
 
 end
