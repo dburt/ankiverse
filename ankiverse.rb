@@ -46,7 +46,7 @@ class AnkiVerse < Sinatra::Base
 
   get '/bible/:passage' do
     options = {
-      :key => "TEST",
+      :key => "IP",
       :output_format => "plain-text",
       :line_length => 0,
       :dont_include => %w(
