@@ -17,6 +17,7 @@ $(function() {
 });
 </script>
 <style>
+  textarea { font-family: sans-serif; }
   td { vertical-align: top; }
   #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
 </style>
@@ -31,12 +32,16 @@ $(function() {
 
   <td>
   Input poem: <br />
-  <textarea name="poem" cols="40" rows="20"></textarea>
+  <textarea name="poem" cols="80" rows="20"><%= @poem %></textarea>
   </td>
 
   <td>
-  Other fields (tags, etc.): <br />
-  <div class="other_field"><input type="text" name="other_fields[]" /></div>
+  Other fields (tags, etc.):
+  <% [*@other_fields].each do |val| %>
+    <div class="other_field">
+      <input type="text" name="other_fields[]" value="<%= val %>" />
+    </div>
+  <% end %>
   <a href="javascript:" id="add_field">Add</a><br />
   </td>
 
@@ -47,7 +52,7 @@ $(function() {
 </form>
 
 <form action="bible" id="bible_form">
-<input type="text" id="passage" name="passage" value="Psalm 23" />
+<input type="text" id="passage" name="passage" value="<%= @passage %>" />
 <input type="submit" value="Get Bible passage" />
 </form>
 

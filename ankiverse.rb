@@ -11,9 +11,10 @@ require './sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
 
-  #get '/' do
-  ## see public/index.html
-  #end
+  get '/' do
+    @passage = "1 Corinthians 13"
+    erb :index
+  end
 
   post '/' do
 
@@ -63,10 +64,14 @@ class AnkiVerse < Sinatra::Base
         heading-horizontal-lines
       )
     }
+
     response = EsvApiRequest.execute(:passageQuery,
       options.merge(:passage => params[:passage]))
-    content_type "text/plain"
-    SentenceSplitter.new(response).lines_of(5..12).join("\n")
+
+    @passage = params[:passage]
+    @poem = SentenceSplitter.new(response).lines_of(5..12).join("\n")
+    @other_fields = [@passage]
+    erb :index
   end
 
 end
