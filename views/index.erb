@@ -25,7 +25,7 @@ $(function() {
 <body>
 <h1>AnkiVerse</h1>
 <h2>Memorise poetry with Anki</h2>
-<form method="post">
+<form action="/" method="post">
   
   <table>
   <tr>
@@ -51,7 +51,7 @@ $(function() {
   <input type="submit" value="Get Anki Cards" />
 </form>
 
-<form action="bible" id="bible_form">
+<form action="/bible" id="bible_form">
 <input type="text" id="passage" name="passage" value="<%= @passage %>" />
 <input type="submit" value="Get Bible passage" />
 </form>
