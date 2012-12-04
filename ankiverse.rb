@@ -11,8 +11,45 @@ require './sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
 
+  SUGGESTED_PASSAGES = (<<-END).split(/\n/).map {|line| line.strip }
+    Genesis 1
+    Genesis 12
+    Exodus 14
+    Exodus 20
+    Deuteronomy 6
+    2 Samuel 7
+    Psalm 1
+    Psalm 23
+    Psalm 96
+    Psalm 100
+    Psalm 121
+    Isaiah 6
+    Isaiah 40
+    Isaiah 53
+    Obadiah
+    Malachi 4
+    Matthew 5
+    Matthew 6
+    Mark 1
+    Mark 15
+    Luke 2
+    Luke 24
+    John 1
+    John 20
+    Romans 1
+    Romans 3
+    Romans 8
+    1 Corinthians 13
+    1 Corinthians 15
+    Philippians 2
+    Jude
+    Revelation 1
+    Revelation 21
+    Revelation 22
+  END
+
   get '/' do
-    @passage = "1 Corinthians 13"
+    @passage = SUGGESTED_PASSAGES[rand(SUGGESTED_PASSAGES.size)]
     erb :index
   end
 
