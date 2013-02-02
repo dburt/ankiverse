@@ -21,6 +21,7 @@
     textarea { font-family: sans-serif; }
     td { vertical-align: top; }
     #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
+    td + td { font-size: smaller; color: #999; padding: 1ex; }
     td > div { margin: 1em 0; }
     input[name="lines[]"] { width: 2em; }
   </style>
@@ -28,7 +29,7 @@
 
 <body>
   <h1>AnkiVerse</h1>
-  <h2>Memorise poetry with Anki</h2>
+  <h2>Memorise poetry with <a href="http://ankisrs.net/">Anki</a></h2>
   <form action="/" method="post">
     <table>
       <tr>
@@ -69,6 +70,10 @@
     </table>
     <input type="submit" value="Get Anki Cards" />
   </form>
+
+  <p>
+    <a href="mailto:dave@burt.id.au">Help</a>
+  </p>
 
   <form action="/bible" id="bible_form">
     <input type="text" id="passage" name="passage" value="<%= @passage %>" />
