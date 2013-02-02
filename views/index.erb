@@ -37,7 +37,7 @@ $(function() {
 
   <td>
   Other fields (tags, etc.):
-  <% [*@other_fields].each do |val| %>
+  <% (@other_fields || [""]).each do |val| %>
     <div class="other_field">
       <input type="text" name="other_fields[]" value="<%= val %>" />
     </div>
