@@ -18,12 +18,17 @@ class AnkiCardGenerator
 
   def csv(options = {})
     # future options: :ellipsis, :lines
+    q_lines, a_lines = options[:lines]
+    unless (1..20).include?(q_lines) && (1..20).include?(a_lines)
+      raise ArgumentError, "the numbers of lines need to be numbers"
+    end
     CSV.generate do |csv|
-      (lines.size - 2).times do |i|
+      (lines.size - a_lines).times do |i|
         csv << [
-          lines[[0, i-3].max..i].join("<br/>") + "<br/>" +   # 4 prev lines
+          lines[[0, i-q_lines+1].max..i].join("<br/>") +   # 4 prev lines
+            "<br/>" +
             (options[:ellipsis] == false ? "" : "..."),
-          lines[i + 1, 2].join("<br/>"),                     # 2 next lines
+          lines[i + 1, a_lines].join("<br/>"),             # 2 next lines
           *other_fields
         ]
       end

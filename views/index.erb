@@ -22,6 +22,7 @@
     td { vertical-align: top; }
     #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
     td > div { margin: 1em 0; }
+    input[name="lines[]"] { width: 2em; }
   </style>
 </head>
 
@@ -36,6 +37,18 @@
           <textarea name="poem" cols="80" rows="20"><%= @poem %></textarea>
         </td>
         <td>
+          <div>
+            <label>
+              Lines to include on question card (default 4):
+              <input name="lines[]" value="4"/>
+            </label>
+          </div>
+          <div>
+            <label>
+              Lines to include on answer card (default 2):
+              <input name="lines[]" value="2"/>
+            </label>
+          </div>
           <div>
             <label>
               <input name="ellipsis" type="checkbox" checked="checked"/>
