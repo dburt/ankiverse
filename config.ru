@@ -1,2 +1,2 @@
-require 'ankiverse'
+require './ankiverse'
 run AnkiVerse

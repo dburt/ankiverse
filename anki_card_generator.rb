@@ -18,7 +18,7 @@ class AnkiCardGenerator
 
   def csv(options = {})
     # future options: :ellipsis, :lines
-    FasterCSV.generate do |csv|
+    CSV.generate do |csv|
       (lines.size - 2).times do |i|
         csv << [
           lines[[0, i-3].max..i].join("<br/>") + "<br/>...", # 4 prev lines
