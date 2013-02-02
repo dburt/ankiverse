@@ -61,7 +61,7 @@ class AnkiVerse < Sinatra::Base
     response['Content-Disposition'] = "attachment; filename=ankiverse.csv"
 
     AnkiCardGenerator.new(params["poem"], params["other_fields"]).
-      csv(:lines => [4, 2], :ellipsis => true)
+      csv(:lines => [4, 2], :ellipsis => !!params["ellipsis"])
   end
 
   get '/bible/:passage' do

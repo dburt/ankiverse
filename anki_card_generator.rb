@@ -21,7 +21,8 @@ class AnkiCardGenerator
     CSV.generate do |csv|
       (lines.size - 2).times do |i|
         csv << [
-          lines[[0, i-3].max..i].join("<br/>") + "<br/>...", # 4 prev lines
+          lines[[0, i-3].max..i].join("<br/>") + "<br/>" +   # 4 prev lines
+            (options[:ellipsis] == false ? "" : "..."),
           lines[i + 1, 2].join("<br/>"),                     # 2 next lines
           *other_fields
         ]

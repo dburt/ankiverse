@@ -20,6 +20,7 @@ $(function() {
   textarea { font-family: sans-serif; }
   td { vertical-align: top; }
   #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
+  td > div { margin: 1em 0; }
 </style>
 </head>
 <body>
@@ -36,6 +37,15 @@ $(function() {
   </td>
 
   <td>
+
+  <div>
+    <label>
+      <input name="ellipsis" type="checkbox" checked="checked"/>
+      Include ellipsis (...) at end of question card
+    </label>
+  </div>
+
+  <div>
   Other fields (tags, etc.):
   <% (@other_fields || [""]).each do |val| %>
     <div class="other_field">
@@ -43,6 +53,8 @@ $(function() {
     </div>
   <% end %>
   <a href="javascript:" id="add_field">Add</a><br />
+  </div>
+
   </td>
 
   </tr>
