@@ -2,9 +2,11 @@
 
 require 'rubygems'
 require 'sinatra'
-require 'csv'
 require 'iconv'
 require 'yaml'
+
+require RUBY_VERSION < '1.9' ? 'fastercsv' : 'csv'
+CSV = FasterCSV if not defined? CSV
 
 require './anki_card_generator'
 require './esv_api_request'
