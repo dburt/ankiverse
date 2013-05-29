@@ -9,9 +9,8 @@ class AnkiCardGenerator
 
   def lines
     @lines ||= begin
-      iconv = Iconv.new('UTF-8', 'WINDOWS-1252')
       poem.strip.split(/\r?\n/).map do |line|
-        iconv.iconv line.strip
+        line.strip
       end
     end
   end

@@ -2,7 +2,6 @@
 
 require 'rubygems'
 require 'sinatra'
-require 'iconv'
 require 'yaml'
 
 require RUBY_VERSION < '1.9' ? 'fastercsv' : 'csv'
