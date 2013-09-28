@@ -78,6 +78,8 @@
 
   <form action="/bible" id="bible_form">
     <input type="text" id="passage" name="passage" value="<%= @passage %>" />
+    <label><input type="radio" name="version" value="ESV" checked /> ESV</label>
+    <label><input type="radio" name="version" value="NIV" /> NIV</label>
     <input type="submit" value="Get Bible passage" />
   </form>
 

@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'sinatra'
+require 'bible_gateway'
 require 'yaml'
 
 require RUBY_VERSION < '1.9' ? 'fastercsv' : 'csv'
@@ -66,28 +67,46 @@ class AnkiVerse < Sinatra::Base
           :ellipsis => !!params["ellipsis"])
   end
 
-  get '/bible/:passage' do
-    options = {
-      :key => "IP",
-      :output_format => "plain-text",
-      :line_length => 0,
-      :dont_include => %w(
-        passage-references
-        first-verse-numbers
-        verse-numbers
-        footnotes
-        footnote-links
-        headings
-        subheadings
-        audio-link
-        short-copyright
-        passage-horizontal-lines
-        heading-horizontal-lines
-      )
-    }
+  get '/bible/:passage/:version' do
+    case params[:version]
+    when 'NIV'
+      b = BibleGateway.new
+      b.version = :new_international_version
+      response = b.lookup(params[:passage])
+      next unless response
+      doc = Nokogiri::HTML(response[:content])
+      doc.search('h3').remove
+      doc.search('sup').remove
+      doc.search('.chapternum').remove
+      #TODO: respect poetry lines
+      #response = response.merge(:text => doc.text).inspect #DEBUG
+      response = doc.text
+    when 'ESV'
 
-    response = EsvApiRequest.execute(:passageQuery,
-      options.merge(:passage => params[:passage]))
+      options = {
+        :key => "IP",
+        :output_format => "plain-text",
+        :line_length => 0,
+        :dont_include => %w(
+          passage-references
+          first-verse-numbers
+          verse-numbers
+          footnotes
+          footnote-links
+          headings
+          subheadings
+          audio-link
+          short-copyright
+          passage-horizontal-lines
+          heading-horizontal-lines
+        )
+      }
+
+      response = EsvApiRequest.execute(:passageQuery,
+        options.merge(:passage => params[:passage]))
+    else
+      raise ArgumentError, "Please select a valid version"
+    end
 
     @passage = params[:passage]
     @poem = SentenceSplitter.new(response).lines_of(5..12).join("\n")
