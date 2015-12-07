@@ -21,7 +21,7 @@ class AnkiCardGenerator
     unless (1..20).include?(q_lines) && (1..20).include?(a_lines)
       raise ArgumentError, "the numbers of lines need to be numbers"
     end
-    CSV.generate do |csv|
+    "\xEF\xBB\xBF" + CSV.generate do |csv|
       (lines.size - a_lines).times do |i|
         csv << [
           lines[[0, i-q_lines+1].max..i].join("<br/>") +   # 4 prev lines
