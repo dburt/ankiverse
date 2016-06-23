@@ -108,8 +108,10 @@ class AnkiVerse < Sinatra::Base
       raise ArgumentError, "Please select a valid version"
     end
 
+    text = "#{params[:passage]}\n#{response}"
+
     @passage = params[:passage]
-    @poem = SentenceSplitter.new(response).lines_of(5..12).join("\n")
+    @poem = SentenceSplitter.new(text).lines_of(5..12).join("\n")
     @other_fields = [@passage]
     erb :index
   end
