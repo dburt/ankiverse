@@ -81,6 +81,7 @@ class AnkiVerse < Sinatra::Base
       #TODO: respect poetry lines
       #response = response.merge(:text => doc.text).inspect #DEBUG
       response = doc.text
+      text = response
     when 'ESV'
 
       options = {
@@ -104,11 +105,10 @@ class AnkiVerse < Sinatra::Base
 
       response = EsvApiRequest.execute(:passageQuery,
         options.merge(:passage => params[:passage]))
+      text = "#{params[:passage]}\n#{response}"
     else
       raise ArgumentError, "Please select a valid version"
     end
-
-    text = "#{params[:passage]}\n#{response}"
 
     @passage = params[:passage]
     @poem = SentenceSplitter.new(text).lines_of(5..12).join("\n")

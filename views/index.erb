@@ -10,7 +10,8 @@
       });
       $('#bible_form').submit(function() {
         if ($('#passage').val()) {
-          document.location = "/bible/" + $('#passage').val();
+          document.location = "/bible/" + $('#passage').val() +
+            "/" + $('[name=version]:checked').attr('value');
         }
         return false;
       });
@@ -79,7 +80,7 @@
   <form action="/bible" id="bible_form">
     <input type="text" id="passage" name="passage" value="<%= @passage %>" />
     <label><input type="radio" name="version" value="ESV" checked /> ESV</label>
-    <label><input type="radio" name="version" value="NIV" /> NIV</label>
+    <label><input type="radio" name="version" value="NIV" /> NIV (beta)</label>
     <input type="submit" value="Get Bible passage" />
   </form>
 
