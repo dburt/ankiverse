@@ -25,5 +25,4 @@ http://www.supermemo.com/help/faq/ks.htm#sequences
 
 ## To Do
 
-* Add Gemfile
 * Generate serial numbers and verse numbers
