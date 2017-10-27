@@ -67,7 +67,7 @@ class AnkiVerse < Sinatra::Base
           :ellipsis => !!params["ellipsis"])
   end
 
-  get '/bible/:passage/:version' do
+  get '/bible/:passage/:version/:verse_numbers' do
     case params[:version]
     when 'NIV'
       b = BibleGateway.new
@@ -91,7 +91,6 @@ class AnkiVerse < Sinatra::Base
         :dont_include => %w(
           passage-references
           first-verse-numbers
-          verse-numbers
           footnotes
           footnote-links
           headings
@@ -103,8 +102,19 @@ class AnkiVerse < Sinatra::Base
         )
       }
 
+      if params[:verse_numbers] == 'without_verse_numbers'
+        options[:dont_include].push('verse_numbers')
+      end
+
+
       response = EsvApiRequest.execute(:passageQuery,
         options.merge(:passage => params[:passage]))
+
+      # Add whitespace to verse numbers if necessary for more readability
+      if params[:verse_numbers] == 'with_verse_numbers'
+        response.gsub!("\]", "\] ")
+      end
+
       text = "#{params[:passage]}\n#{response}"
     else
       raise ArgumentError, "Please select a valid version"
