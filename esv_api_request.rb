@@ -9,6 +9,7 @@ class EsvApiRequest
   def initialize(action, options)
     @action = action
     @options = options
+    @options['key'] = 'TEST'
     [*@options.delete(:dont_include)].each do |opt|
       @options["include-#{opt}"] = false
     end
