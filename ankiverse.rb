@@ -67,7 +67,7 @@ class AnkiVerse < Sinatra::Base
           :ellipsis => !!params["ellipsis"])
   end
 
-  get '/bible/:passage/:version/:verse_numbers' do
+  get '/bible/:passage/:version/:verse_numbers?' do
     case params[:version]
     when 'NIV'
       b = BibleGateway.new
@@ -76,7 +76,7 @@ class AnkiVerse < Sinatra::Base
       next unless response
       doc = Nokogiri::HTML(response[:content])
       doc.search('h3').remove
-      doc.search('sup').remove
+      doc.search('sup').remove unless params[:verse_numbers] == 'with_verse_numbers'
       doc.search('.chapternum').remove
       #TODO: respect poetry lines
       #response = response.merge(:text => doc.text).inspect #DEBUG
@@ -102,18 +102,14 @@ class AnkiVerse < Sinatra::Base
         )
       }
 
-      if params[:verse_numbers] == 'without_verse_numbers'
-        options[:dont_include].push('verse_numbers')
-      end
+      options[:dont_include] << 'verse_numbers' unless params[:verse_numbers] == 'with_verse_numbers'
 
 
       response = EsvApiRequest.execute(:passageQuery,
         options.merge(:passage => params[:passage]))
 
       # Add whitespace to verse numbers if necessary for more readability
-      if params[:verse_numbers] == 'with_verse_numbers'
-        response.gsub!("\]", "\] ")
-      end
+      response.gsub!("\]", "\] ") if params[:verse_numbers] == 'with_verse_numbers'
 
       text = "#{params[:passage]}\n#{response}"
     else

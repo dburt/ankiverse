@@ -10,9 +10,12 @@
       });
       $('#bible_form').submit(function() {
         if ($('#passage').val()) {
-          document.location = "/bible/" + $('#passage').val() +
-            "/" + $('[name=version]:checked').attr('value') +
-            "/" + $('[name=verse_numbers]:checked').attr('value');
+          newlocation = "/bible/" + $('#passage').val() +
+            "/" + $('[name=version]:checked').attr('value') + "/";
+          if ($('[name=verse_numbers]:checked').val() == 'with_verse_numbers') {
+            newlocation = newlocation + $('[name=verse_numbers]:checked').attr('value');
+          }
+          document.location = newlocation;
         }
         return false;
       });
