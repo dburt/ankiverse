@@ -81,7 +81,7 @@ class AnkiVerse < Sinatra::Base
       passage.search('.crossrefs').remove
       passage.search('.publisher-info-bottom').remove
       ref = "#{params[:passage]} (NIV)"
-      text = "#{ref}\n#{response}\n#{ref}"
+      text = "#{ref}\n#{passage.text}\n#{ref}"
 
     when 'ESV'
 
