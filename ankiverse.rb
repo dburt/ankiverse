@@ -1,8 +1,8 @@
 #!/usr/bin/ruby -w
 
 require 'rubygems'
+require 'nokogiri'
 require 'sinatra'
-require 'bible_gateway'
 require 'yaml'
 
 require RUBY_VERSION < '1.9' ? 'fastercsv' : 'csv'
@@ -70,18 +70,19 @@ class AnkiVerse < Sinatra::Base
   get '/bible/:passage/:version/:verse_numbers?' do
     case params[:version]
     when 'NIV'
-      b = BibleGateway.new
-      b.version = :new_international_version
-      response = b.lookup(params[:passage])
-      next unless response
-      doc = Nokogiri::HTML(response[:content])
-      doc.search('h3').remove
-      doc.search('sup').remove unless params[:verse_numbers] == 'with_verse_numbers'
-      doc.search('.chapternum').remove
-      #TODO: respect poetry lines
-      #response = response.merge(:text => doc.text).inspect #DEBUG
-      response = doc.text
-      text = response
+      body = Net::HTTP.get(URI.parse("https://www.biblegateway.com/passage/?version=NIV&search=" + params[:passage].gsub(/\s+/, '+')))
+      doc = Nokogiri(body.gsub(/\<br[^>]*?\>/, "\n"))
+      passage = doc.css('.passage-text')
+      passage.search('h1').remove
+      passage.search('h3').remove
+      passage.search('sup').remove unless params[:verse_numbers] == 'with_verse_numbers'
+      passage.search('.chapternum').remove
+      passage.search('.footnotes').remove
+      passage.search('.crossrefs').remove
+      passage.search('.publisher-info-bottom').remove
+      ref = "#{params[:passage]} (NIV)"
+      text = "#{ref}\n#{response}\n#{ref}"
+
     when 'ESV'
 
       options = {
