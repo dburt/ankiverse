@@ -4,12 +4,12 @@ class EsvApiRequest
 
   attr_reader :action, :options
 
-  BASE_URI = "http://www.esvapi.org/v2/rest"
+  BASE_URI = "https://api.esv.org/v3/passage/text/"
 
   def initialize(action, options)
     @action = action
     @options = options
-    @options['key'] = 'TEST'
+    @options['key'] = ENV['ESV_API_KEY'] or raise "ENV var missing: ESV_API_KEY"
     [*@options.delete(:dont_include)].each do |opt|
       @options["include-#{opt}"] = false
     end
@@ -17,7 +17,7 @@ class EsvApiRequest
 
   def options_for_query_string
     options.map do |key, val|
-      "#{URI.escape key.to_s}=#{URI.escape val.to_s}"
+      "#{CGI.escape key.to_s}=#{CGI.escape val.to_s}"
     end.join("&")
   end
 
