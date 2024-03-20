@@ -1,2 +1,5 @@
 tmp/
 log
+.bundle
+vendor
+public/.well-known

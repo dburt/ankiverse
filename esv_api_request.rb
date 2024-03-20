@@ -17,7 +17,7 @@ class EsvApiRequest
 
   def options_for_query_string
     options.map do |key, val|
-      "#{CGI.escape key.to_s}=#{CGI.escape val.to_s}"
+      "#{URI.encode_www_form_component key.to_s}=#{URI.encode_www_form_component val.to_s}"
     end.join("&")
   end
 

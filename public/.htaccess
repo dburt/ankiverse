@@ -1,0 +1,4 @@
+Options +FollowSymLinks
+#PassengerRuby /usr/bin/ruby
+PassengerRuby /home/illuminu/.rbenv/shims/ruby
+#PassengerAppEnv development
