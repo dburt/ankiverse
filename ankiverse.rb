@@ -5,51 +5,16 @@ require 'yaml'
 
 require 'bundler'
 Bundler.load
-require 'nokogiri'
 require 'sinatra'
 
 require_relative 'lib/anki_card_generator'
+require_relative 'lib/bible_gateway_passage_fetcher'
 require_relative 'lib/esv_api_request'
 require_relative 'lib/sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
 
-  SUGGESTED_PASSAGES = (<<-END).split(/\n/).map {|line| line.strip }
-    Genesis 1
-    Genesis 12
-    Exodus 14
-    Exodus 20
-    Deuteronomy 6
-    2 Samuel 7
-    Psalm 1
-    Psalm 23
-    Psalm 96
-    Psalm 100
-    Psalm 121
-    Isaiah 6
-    Isaiah 40
-    Isaiah 53
-    Obadiah
-    Malachi 4
-    Matthew 5
-    Matthew 6
-    Mark 1
-    Mark 15
-    Luke 2
-    Luke 24
-    John 1
-    John 20
-    Romans 1
-    Romans 3
-    Romans 8
-    1 Corinthians 13
-    1 Corinthians 15
-    Philippians 2
-    Jude
-    Revelation 1
-    Revelation 21
-    Revelation 22
-  END
+  SUGGESTED_PASSAGES = File.read('suggested_passages.txt').lines.map(&:strip)
 
   get '/' do
     @passage = SUGGESTED_PASSAGES[rand(SUGGESTED_PASSAGES.size)]
@@ -70,18 +35,7 @@ class AnkiVerse < Sinatra::Base
   get '/bible/:passage/:version/:verse_numbers?' do
     case params[:version]
     when 'NIV'
-      body = Net::HTTP.get(URI.parse("https://www.biblegateway.com/passage/?version=NIV&search=" + params[:passage].gsub(/\s+/, '+')))
-      doc = Nokogiri(body.gsub(/\<br[^>]*?\>/, "\n"))
-      passage = doc.css('.passage-text')
-      passage.search('h1').remove
-      passage.search('h3').remove
-      passage.search('sup').remove unless params[:verse_numbers] == 'with_verse_numbers'
-      passage.search('.chapternum').remove
-      passage.search('.footnotes').remove
-      passage.search('.crossrefs').remove
-      passage.search('.publisher-info-bottom').remove
-      ref = "#{params[:passage]} (NIV)"
-      text = "#{ref}\n#{passage.text}\n#{ref}"
+      text = BibleGatewayPassageFetcher.fetch(params[:passage], :verse_numbers => params[:verse_numbers])
 
     when 'ESV'
 
