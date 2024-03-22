@@ -1,3 +1,4 @@
+require 'csv'
 
 class AnkiCardGenerator
   attr_accessor :poem, :other_fields

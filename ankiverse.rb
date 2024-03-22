@@ -2,7 +2,6 @@
 
 require 'rubygems'
 require 'yaml'
-require 'csv'
 
 require 'bundler'
 Bundler.load
