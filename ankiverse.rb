@@ -9,7 +9,7 @@ require 'sinatra'
 
 require_relative 'lib/anki_card_generator'
 require_relative 'lib/bible_gateway_passage_fetcher'
-require_relative 'lib/esv_api_request'
+require_relative 'lib/esv_passage_fetcher'
 require_relative 'lib/sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
@@ -28,50 +28,22 @@ class AnkiVerse < Sinatra::Base
     response['Content-Disposition'] = "attachment; filename=ankiverse.csv"
 
     AnkiCardGenerator.new(params["poem"], params["other_fields"]).
-      csv(:lines => params["lines"].map(&:to_i),
-          :ellipsis => !!params["ellipsis"])
+      csv(lines: params["lines"].map(&:to_i),
+          ellipsis: !!params["ellipsis"])
   end
 
   get '/bible/:passage/:version/:verse_numbers?' do
+    @passage = params[:passage]
+
     case params[:version]
     when 'NIV'
-      text = BibleGatewayPassageFetcher.fetch(params[:passage], :verse_numbers => params[:verse_numbers])
-
+      text = BibleGatewayPassageFetcher.fetch(@passage, verse_numbers: params[:verse_numbers], version: 'NIV')
     when 'ESV'
-
-      options = {
-        :key => "IP",
-        :output_format => "plain-text",
-        :line_length => 0,
-        :dont_include => %w(
-          passage-references
-          first-verse-numbers
-          footnotes
-          footnote-links
-          headings
-          subheadings
-          audio-link
-          short-copyright
-          passage-horizontal-lines
-          heading-horizontal-lines
-        )
-      }
-
-      options[:dont_include] << 'verse_numbers' unless params[:verse_numbers] == 'with_verse_numbers'
-
-
-      response = EsvApiRequest.execute(:passageQuery,
-        options.merge(:passage => params[:passage]))
-
-      # Add whitespace to verse numbers if necessary for more readability
-      response.gsub!("\]", "\] ") if params[:verse_numbers] == 'with_verse_numbers'
-
-      text = "#{params[:passage]}\n#{response}"
+      text = EsvPassageFetcher.fetch(@passage, verse_numbers: params[:verse_numbers])
     else
       raise ArgumentError, "Please select a valid version"
     end
 
-    @passage = params[:passage]
     @poem = SentenceSplitter.new(text).lines_of(5..12).join("\n")
     @other_fields = [@passage]
     erb :index
