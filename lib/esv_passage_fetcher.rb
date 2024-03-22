@@ -28,9 +28,7 @@ class EsvPassageFetcher
   def fetch
     raise ArgumentError, 'missing API token' unless @api_token
     response = Faraday.get(BASE_URL, @options.merge(q: @ref), { 'Authorization' => "Token #{@api_token}" })
-    p response
     @json = response.body
-    puts @json
   end
 
   def clean
