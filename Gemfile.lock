@@ -3,9 +3,15 @@ GEM
   specs:
     base64 (0.2.0)
     dotenv (3.1.0)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     minitest (5.22.3)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
+    net-http (0.4.1)
+      uri
     nio4r (2.7.1)
     nokogiri (1.16.3-aarch64-linux)
       racc (~> 1.4)
@@ -31,7 +37,7 @@ GEM
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
-    rake (13.0.6)
+    rake (13.1.0)
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
       mustermann (~> 3.0)
@@ -40,6 +46,7 @@ GEM
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
     tilt (2.3.0)
+    uri (0.13.0)
     webrick (1.8.1)
 
 PLATFORMS
@@ -52,6 +59,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  faraday
   minitest
   nokogiri
   puma
