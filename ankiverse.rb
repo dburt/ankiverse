@@ -9,9 +9,9 @@ Bundler.load
 require 'nokogiri'
 require 'sinatra'
 
-require './anki_card_generator'
-require './esv_api_request'
-require './sentence_splitter'
+require_relative 'lib/anki_card_generator'
+require_relative 'lib/esv_api_request'
+require_relative 'lib/sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
 

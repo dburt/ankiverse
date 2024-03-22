@@ -14,6 +14,7 @@ class SentenceSplitter
   def lines_of(range)
     min_words = range.first
     max_words = range.last
+    raise ArgumentError, "Invalid range" if max_words < min_words * 2
     words_left = 0
     line = []
 

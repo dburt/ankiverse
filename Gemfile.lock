@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.2.0)
+    minitest (5.22.3)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.1)
@@ -48,6 +49,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  minitest
   nokogiri
   puma
   rackup
