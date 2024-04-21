@@ -4,8 +4,8 @@ require 'rubygems'
 require 'yaml'
 
 require 'bundler'
-Bundler.load
-require 'sinatra'
+Bundler.require
+Dotenv.load
 
 require_relative 'lib/anki_card_generator'
 require_relative 'lib/bible_gateway_passage_fetcher'
@@ -49,4 +49,5 @@ class AnkiVerse < Sinatra::Base
     erb :index
   end
 
+  run! if app_file == $0
 end
