@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+set -x
+
+# build and run on Google Cloud Run
+gcloud builds submit --tag gcr.io/gcp-ankiverse/ankiverse
+gcloud run deploy ankiverse \
+  --region us-east1 \
+  --image gcr.io/gcp-ankiverse/ankiverse \
+  --platform managed \
+  --update-secrets ESV_API_KEY=ESV_API_KEY:latest \
+  --max-instances 1 \
+  --allow-unauthenticated
