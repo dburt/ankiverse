@@ -10,6 +10,8 @@ Dotenv.load
 require_relative 'lib/anki_card_generator'
 require_relative 'lib/bible_gateway_passage_fetcher'
 require_relative 'lib/esv_passage_fetcher'
+require_relative 'lib/bible_api_fetcher'
+require_relative 'lib/bolls_passage_fetcher'
 require_relative 'lib/sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
@@ -40,8 +42,12 @@ class AnkiVerse < Sinatra::Base
       text = BibleGatewayPassageFetcher.fetch(@passage, verse_numbers: params[:verse_numbers], version: 'NIV')
     when 'ESV'
       text = EsvPassageFetcher.fetch(@passage, verse_numbers: params[:verse_numbers])
+    when 'WEB'
+      text = BibleApiFetcher.fetch(@passage, translation: 'web', verse_numbers: params[:verse_numbers])
+    when 'KJV'
+      text = BollsPassageFetcher.fetch(@passage, translation: 'kjv', verse_numbers: params[:verse_numbers])
     else
-      raise ArgumentError, "Please select a valid version"
+      raise ArgumentError, "Please select a valid version (NIV, ESV, WEB, or KJV)"
     end
 
     @poem = SentenceSplitter.new(text).lines_of(5..12).join("\n")
