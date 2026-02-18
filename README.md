@@ -51,6 +51,16 @@ Run integration tests (requires internet connection):
 INTEGRATION_TESTS=true ruby -Ilib:test test/*_integration_test.rb
 ```
 
+## Deploying
+
+The app runs on Google Cloud Run. To build and deploy:
+
+```bash
+./deploy
+```
+
+This builds the Docker image via Cloud Build and deploys it to Cloud Run.
+
 ## Security
 
 See [SECURITY_UPDATES.md](SECURITY_UPDATES.md) for information about security vulnerabilities and recommended dependency updates.
