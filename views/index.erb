@@ -83,13 +83,13 @@
 
   <form action="/bible" id="bible_form">
     <input type="text" id="passage" name="passage" value="<%= @passage %>" />
-    <label><input type="radio" name="version" value="NIV" checked /> NIV</label>
-    <label><input type="radio" name="version" value="ESV" /> ESV</label>
-    <label><input type="radio" name="version" value="WEB" /> WEB</label>
-    <label><input type="radio" name="version" value="KJV" /> KJV</label>
+    <label><input type="radio" name="version" value="NIV" <%= 'checked' if @version.nil? || @version == 'NIV' %> /> NIV</label>
+    <label><input type="radio" name="version" value="ESV" <%= 'checked' if @version == 'ESV' %> /> ESV</label>
+    <label><input type="radio" name="version" value="WEB" <%= 'checked' if @version == 'WEB' %> /> WEB</label>
+    <label><input type="radio" name="version" value="KJV" <%= 'checked' if @version == 'KJV' %> /> KJV</label>
     <br />
-    <label><input type="radio" name="verse_numbers" value="without_verse_numbers" checked /> Without verse numbers</label>
-    <label><input type="radio" name="verse_numbers" value="with_verse_numbers" /> With verse numbers</label>
+    <label><input type="radio" name="verse_numbers" value="without_verse_numbers" <%= 'checked' if @verse_numbers != 'with_verse_numbers' %> /> Without verse numbers</label>
+    <label><input type="radio" name="verse_numbers" value="with_verse_numbers" <%= 'checked' if @verse_numbers == 'with_verse_numbers' %> /> With verse numbers</label>
     <br />
     <input type="submit" value="Get Bible passage" />
   </form>

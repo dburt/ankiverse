@@ -36,8 +36,10 @@ class AnkiVerse < Sinatra::Base
 
   get '/bible/:passage/:version/:verse_numbers?' do
     @passage = params[:passage]
+    @version = params[:version]
+    @verse_numbers = params[:verse_numbers]
 
-    case params[:version]
+    case @version
     when 'NIV'
       text = BibleGatewayPassageFetcher.fetch(@passage, verse_numbers: params[:verse_numbers], version: 'NIV')
     when 'ESV'
