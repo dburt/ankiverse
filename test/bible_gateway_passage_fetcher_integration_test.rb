@@ -56,10 +56,8 @@ class BibleGatewayPassageFetcherIntegrationTest < Minitest::Test
     # Test that we can reach the BibleGateway API
     fetcher = BibleGatewayPassageFetcher.new('Genesis 1:1')
 
-    assert_nothing_raised do
-      fetcher.fetch
-    end
-
+    fetcher.fetch
+    fetcher.clean
     refute_nil fetcher.text, "Expected API to return some response"
   end
 end

@@ -13,7 +13,7 @@ class BibleApiFetcherIntegrationTest < Minitest::Test
     refute_empty text, "Expected non-empty text from bible-api.com"
 
     # Verify it contains the passage reference
-    assert_includes text, "Psalm 117", "Expected text to include passage reference"
+    assert_includes text, "Psalms 117", "Expected text to include passage reference (API returns 'Psalms' plural)"
 
     # Verify it contains key words from Psalm 117
     assert_includes text.downcase, "praise", "Expected Psalm 117 to contain 'praise'"
@@ -67,10 +67,8 @@ class BibleApiFetcherIntegrationTest < Minitest::Test
     # Test that we can reach the bible-api.com API
     fetcher = BibleApiFetcher.new('Genesis 1:1')
 
-    assert_nothing_raised do
-      fetcher.fetch
-    end
-
+    fetcher.fetch
+    fetcher.clean
     refute_nil fetcher.text, "Expected API to return some response"
   end
 end

@@ -77,8 +77,6 @@ class BollsPassageFetcher
     'revelation' => 66, 'rev' => 66
   }
 
-  # Book ID to name mapping (for display)
-  BOOK_NAMES = BOOK_IDS.invert.transform_keys(&:to_s).select { |k, _| k.match?(/^[a-z ]+$/) && !k.include?('1') && !k.include?('2') && !k.include?('3') }
 
   def initialize(passage, options = {})
     @passage = passage
@@ -117,7 +115,7 @@ class BollsPassageFetcher
     conn = Faraday.new(url: 'https://bolls.life')
 
     verse_range.each do |verse|
-      response = conn.get("/get-text/#{@translation.upcase}/#{book_id}/#{chapter}/#{verse}/")
+      response = conn.get("/get-verse/#{@translation.upcase}/#{book_id}/#{chapter}/#{verse}/")
 
       if response.success?
         json = JSON.parse(response.body)
@@ -134,19 +132,16 @@ class BollsPassageFetcher
   def clean
     return unless @json_responses.any?
 
-    # Get book name from first response
-    first_verse = @json_responses.first
-    book_id = first_verse['book']
-    book_name = BOOK_NAMES[book_id] || "Book #{book_id}"
-    chapter = first_verse['chapter']
-    translation_name = first_verse['translation']
+    # Parse the original passage to get book name and chapter
+    book_name, chapter, _ = parse_passage(@passage)
+    translation_name = @translation.upcase
 
-    # Build reference
+    # Build reference from request params and response verse numbers
     verses = @json_responses.map { |v| v['verse'] }
     if verses.length == 1
-      reference = "#{book_name.capitalize} #{chapter}:#{verses.first}"
+      reference = "#{book_name} #{chapter}:#{verses.first}"
     else
-      reference = "#{book_name.capitalize} #{chapter}:#{verses.first}-#{verses.last}"
+      reference = "#{book_name} #{chapter}:#{verses.first}-#{verses.last}"
     end
 
     # Build the text with prefix
@@ -155,8 +150,8 @@ class BollsPassageFetcher
     # Add each verse
     @json_responses.each do |verse_data|
       verse_text = verse_data['text'].strip
-      # Remove HTML tags
-      verse_text = verse_text.gsub(/<[^>]*>/, '')
+      # Remove Strong's number tags (e.g. <S>1063</S>) and any other HTML tags
+      verse_text = verse_text.gsub(/<S>[^<]*<\/S>/, '').gsub(/<[^>]*>/, '')
 
       if @verse_numbers
         @text += "#{verse_data['verse']} #{verse_text}\n"

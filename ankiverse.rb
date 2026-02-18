@@ -47,7 +47,7 @@ class AnkiVerse < Sinatra::Base
     when 'KJV'
       text = BollsPassageFetcher.fetch(@passage, translation: 'kjv', verse_numbers: params[:verse_numbers])
     else
-      raise ArgumentError, "Please select a valid version (NIV, ESV, WEB, or KJV)"
+      halt 400, "Please select a valid version (NIV, ESV, WEB, or KJV)"
     end
 
     @poem = SentenceSplitter.new(text).lines_of(5..12).join("\n")

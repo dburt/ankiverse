@@ -13,7 +13,7 @@ class BollsPassageFetcherIntegrationTest < Minitest::Test
     refute_empty text, "Expected non-empty text from bolls.life"
 
     # Verify it contains the passage reference
-    assert_includes text, "psalm", "Expected text to include book name"
+    assert_includes text, "Psalm", "Expected text to include book name"
 
     # Verify it contains key words from Psalm 117 (KJV version)
     assert_includes text.downcase, "praise", "Expected Psalm 117 to contain 'praise'"
@@ -69,10 +69,8 @@ class BollsPassageFetcherIntegrationTest < Minitest::Test
     # Test that we can reach the bolls.life API
     fetcher = BollsPassageFetcher.new('Genesis 1:1')
 
-    assert_nothing_raised do
-      fetcher.fetch
-    end
-
+    fetcher.fetch
+    fetcher.clean
     refute_nil fetcher.text, "Expected API to return some response"
   end
 
