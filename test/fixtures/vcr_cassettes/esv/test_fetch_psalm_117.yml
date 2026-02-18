@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.esv.org/v3/passage/text/?include-first-verse-numbers=false&include-footnotes=false&include-headings=false&include-passage-references=false&include-short-copyright=false&include-verse-numbers=false&indent-declares=0&indent-paragraphs=0&indent-poetry=false&indent-psalm-doxology=0&q=Psalm%20117
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Authorization:
+      - Token <ESV_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:26 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Etag:
+      - W/"3e761a0c5bd3eb57e93d70cd68f762a9"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      Access-Control-Allow-Headers:
+      - Authorization
+      Access-Control-Max-Age:
+      - '432000'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"query": "Psalm 117", "canonical": "Psalm 117", "parsed": [[19117001,
+        19117002]], "passage_meta": [{"canonical": "Psalm 117", "chapter_start": [19117001,
+        19117002], "chapter_end": [19117001, 19117002], "prev_verse": 19116019, "next_verse":
+        19118001, "prev_chapter": [19116001, 19116019], "next_chapter": [19118001,
+        19118029]}], "passages": ["Praise the LORD, all nations!\nExtol him, all peoples!\nFor
+        great is his steadfast love toward us,\nand the faithfulness of the LORD endures
+        forever.\nPraise the LORD!\n\n\n"]}'
+  recorded_at: Wed, 18 Feb 2026 11:47:26 GMT
+recorded_with: VCR 6.4.0

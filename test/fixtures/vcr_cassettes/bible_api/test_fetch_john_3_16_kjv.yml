@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bible-api.com/John+3:16?translation=kjv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bible-api.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:19 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '520'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET
+      - OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: '{"reference":"John 3:16","verses":[{"book_id":"JHN","book_name":"John","chapter":3,"verse":16,"text":"          For
+        God so loved the world, that he gave his only begotten Son, that whosoever
+        believeth in him should not perish, but have everlasting life.\n"}],"text":"          For
+        God so loved the world, that he gave his only begotten Son, that whosoever
+        believeth in him should not perish, but have everlasting life.\n","translation_id":"kjv","translation_name":"King
+        James Version","translation_note":"Public Domain"}'
+  recorded_at: Wed, 18 Feb 2026 11:47:19 GMT
+recorded_with: VCR 6.4.0

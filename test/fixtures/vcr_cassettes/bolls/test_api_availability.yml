@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bolls.life/get-verse/KJV/1/1/1/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With,X-CSRFToken,Content-Type
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '1000'
+      Content-Language:
+      - uk
+      Content-Length:
+      - '167'
+      Content-Security-Policy:
+      - cross-origin
+      Content-Type:
+      - application/json
+      Cross-Origin-Embedder-Policy:
+      - unsafe-none
+      Cross-Origin-Opener-Policy:
+      - unsafe-none
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Date:
+      - Wed, 18 Feb 2026 11:47:25 GMT
+      Referrer-Policy:
+      - unsafe-url
+      Server:
+      - nginx/1.29.5
+      Vary:
+      - Accept-Language
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"pk": 2599735, "verse": 1, "text": "In the beginning<S>7225</S> God<S>430</S>
+        created<S>1254</S> <S>853</S> the heaven<S>8064</S> and<S>853</S> the earth<S>776</S>."}'
+  recorded_at: Wed, 18 Feb 2026 11:47:25 GMT
+recorded_with: VCR 6.4.0

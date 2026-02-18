@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.esv.org/v3/passage/text/?include-first-verse-numbers=false&include-footnotes=false&include-headings=false&include-passage-references=false&include-short-copyright=false&include-verse-numbers=true&indent-declares=0&indent-paragraphs=0&indent-poetry=false&indent-psalm-doxology=0&q=Psalm%2023:1-2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Authorization:
+      - Token <ESV_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:23 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Etag:
+      - W/"be2f3865b22834ac12d175c3cfb21c5c"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      Access-Control-Allow-Headers:
+      - Authorization
+      Access-Control-Max-Age:
+      - '432000'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"query": "Psalm 23:1\u20132", "canonical": "Psalm 23:1\u20132", "parsed":
+        [[19023001, 19023002]], "passage_meta": [{"canonical": "Psalm 23:1\u20132",
+        "chapter_start": [19023001, 19023006], "chapter_end": [19023001, 19023006],
+        "prev_verse": 19022031, "next_verse": 19023003, "prev_chapter": [19022001,
+        19022031], "next_chapter": [19024001, 19024010]}], "passages": ["A Psalm of
+        David.\n\n[1] The LORD is my shepherd; I shall not want.\n[2] He makes me
+        lie down in green pastures.\nHe leads me beside still waters.\n\n\n"]}'
+  recorded_at: Wed, 18 Feb 2026 11:47:23 GMT
+recorded_with: VCR 6.4.0

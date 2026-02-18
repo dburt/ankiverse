@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bolls.life/get-verse/KJV/19/117/1/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With,X-CSRFToken,Content-Type
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '1000'
+      Content-Language:
+      - uk
+      Content-Length:
+      - '154'
+      Content-Security-Policy:
+      - cross-origin
+      Content-Type:
+      - application/json
+      Cross-Origin-Embedder-Policy:
+      - unsafe-none
+      Cross-Origin-Opener-Policy:
+      - unsafe-none
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Date:
+      - Wed, 18 Feb 2026 11:47:21 GMT
+      Referrer-Policy:
+      - unsafe-url
+      Server:
+      - nginx/1.29.5
+      Vary:
+      - Accept-Language
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"pk": 2616038, "verse": 1, "text": "O praise<S>1984</S> the LORD<S>3068</S>,
+        all ye nations<S>1471</S>: praise<S>7623</S> him, all ye people<S>523</S>."}'
+  recorded_at: Wed, 18 Feb 2026 11:47:21 GMT
+- request:
+    method: get
+    uri: https://bolls.life/get-verse/KJV/19/117/2/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With,X-CSRFToken,Content-Type
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '1000'
+      Content-Language:
+      - uk
+      Content-Length:
+      - '236'
+      Content-Security-Policy:
+      - cross-origin
+      Content-Type:
+      - application/json
+      Cross-Origin-Embedder-Policy:
+      - unsafe-none
+      Cross-Origin-Opener-Policy:
+      - unsafe-none
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Date:
+      - Wed, 18 Feb 2026 11:47:22 GMT
+      Referrer-Policy:
+      - unsafe-url
+      Server:
+      - nginx/1.29.5
+      Vary:
+      - Accept-Language
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"pk": 2616039, "verse": 2, "text": "For his merciful<S>2617</S> kindness<S>2617</S>
+        is great<S>1396</S> toward us: and the truth<S>571</S> of the LORD<S>3068</S>
+        endureth for ever<S>5769</S>. Praise<S>1984</S> ye the LORD<S>3050</S>."}'
+  recorded_at: Wed, 18 Feb 2026 11:47:22 GMT
+recorded_with: VCR 6.4.0

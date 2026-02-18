@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bible-api.com/Romans+8:28-30
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bible-api.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:20 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET
+      - OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubdomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"reference":"Romans 8:28-30","verses":[{"book_id":"ROM","book_name":"Romans","chapter":8,"verse":28,"text":"We
+        know that all things work together for good for those who love God, to those
+        who are called according to his purpose.\n"},{"book_id":"ROM","book_name":"Romans","chapter":8,"verse":29,"text":"For
+        whom he foreknew, he also predestined to be conformed to the image of his
+        Son, that he might be the firstborn among many brothers.\n"},{"book_id":"ROM","book_name":"Romans","chapter":8,"verse":30,"text":"Whom
+        he predestined, those he also called. Whom he called, those he also justified.
+        Whom he justified, those he also glorified.\n"}],"text":"We know that all
+        things work together for good for those who love God, to those who are called
+        according to his purpose.\nFor whom he foreknew, he also predestined to be
+        conformed to the image of his Son, that he might be the firstborn among many
+        brothers.\nWhom he predestined, those he also called. Whom he called, those
+        he also justified. Whom he justified, those he also glorified.\n","translation_id":"web","translation_name":"World
+        English Bible","translation_note":"Public Domain"}'
+  recorded_at: Wed, 18 Feb 2026 11:47:20 GMT
+recorded_with: VCR 6.4.0

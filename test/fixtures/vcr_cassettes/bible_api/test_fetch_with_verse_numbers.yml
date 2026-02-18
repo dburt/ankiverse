@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bible-api.com/Psalm+23:1-2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bible-api.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:18 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '537'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET
+      - OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: '{"reference":"Psalms 23:1-2","verses":[{"book_id":"PSA","book_name":"Psalms","chapter":23,"verse":1,"text":"Yahweh
+        is my shepherd:\nI shall lack nothing.\n"},{"book_id":"PSA","book_name":"Psalms","chapter":23,"verse":2,"text":"He
+        makes me lie down in green pastures.\nHe leads me beside still waters.\n"}],"text":"Yahweh
+        is my shepherd:\nI shall lack nothing.\nHe makes me lie down in green pastures.\nHe
+        leads me beside still waters.\n","translation_id":"web","translation_name":"World
+        English Bible","translation_note":"Public Domain"}'
+  recorded_at: Wed, 18 Feb 2026 11:47:18 GMT
+recorded_with: VCR 6.4.0

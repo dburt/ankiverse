@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bible-api.com/Psalm+117
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bible-api.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:18 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '616'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET
+      - OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubdomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJyZWZlcmVuY2UiOiJQc2FsbXMgMTE3IiwidmVyc2VzIjpbeyJib29rX2lkIjoiUFNBIiwiYm9va19uYW1lIjoiUHNhbG1zIiwiY2hhcHRlciI6MTE3LCJ2ZXJzZSI6MSwidGV4dCI6IlByYWlzZSBZYWh3ZWgsIGFsbCB5b3UgbmF0aW9ucyFcbkV4dG9sIGhpbSwgYWxsIHlvdSBwZW9wbGVzIVxuIn0seyJib29rX2lkIjoiUFNBIiwiYm9va19uYW1lIjoiUHNhbG1zIiwiY2hhcHRlciI6MTE3LCJ2ZXJzZSI6MiwidGV4dCI6IkZvciBoaXMgbG92aW5nIGtpbmRuZXNzIGlzIGdyZWF0IHRvd2FyZCB1cy5cbllhaHdlaOKAmXMgZmFpdGhmdWxuZXNzIGVuZHVyZXMgZm9yZXZlci5cblByYWlzZSBZYWghXG4ifV0sInRleHQiOiJQcmFpc2UgWWFod2VoLCBhbGwgeW91IG5hdGlvbnMhXG5FeHRvbCBoaW0sIGFsbCB5b3UgcGVvcGxlcyFcbkZvciBoaXMgbG92aW5nIGtpbmRuZXNzIGlzIGdyZWF0IHRvd2FyZCB1cy5cbllhaHdlaOKAmXMgZmFpdGhmdWxuZXNzIGVuZHVyZXMgZm9yZXZlci5cblByYWlzZSBZYWghXG4iLCJ0cmFuc2xhdGlvbl9pZCI6IndlYiIsInRyYW5zbGF0aW9uX25hbWUiOiJXb3JsZCBFbmdsaXNoIEJpYmxlIiwidHJhbnNsYXRpb25fbm90ZSI6IlB1YmxpYyBEb21haW4ifQ==
+  recorded_at: Wed, 18 Feb 2026 11:47:18 GMT
+recorded_with: VCR 6.4.0

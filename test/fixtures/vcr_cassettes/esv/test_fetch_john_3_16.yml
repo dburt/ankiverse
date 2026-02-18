@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.esv.org/v3/passage/text/?include-first-verse-numbers=false&include-footnotes=false&include-headings=false&include-passage-references=false&include-short-copyright=false&include-verse-numbers=false&indent-declares=0&indent-paragraphs=0&indent-poetry=false&indent-psalm-doxology=0&q=John%203:16
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Authorization:
+      - Token <ESV_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 18 Feb 2026 11:47:25 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Etag:
+      - W/"0d251e54d92001d5a049911f72c2582e"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      Access-Control-Allow-Headers:
+      - Authorization
+      Access-Control-Max-Age:
+      - '432000'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"query": "John 3:16", "canonical": "John 3:16", "parsed": [[43003016,
+        43003016]], "passage_meta": [{"canonical": "John 3:16", "chapter_start": [43003001,
+        43003036], "chapter_end": [43003001, 43003036], "prev_verse": 43003015, "next_verse":
+        43003017, "prev_chapter": [43002001, 43002025], "next_chapter": [43004001,
+        43004054]}], "passages": ["\u201cFor God so loved the world, that he gave
+        his only Son, that whoever believes in him should not perish but have eternal
+        life.\n\n"]}'
+  recorded_at: Wed, 18 Feb 2026 11:47:25 GMT
+recorded_with: VCR 6.4.0

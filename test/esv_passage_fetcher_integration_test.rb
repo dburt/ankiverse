@@ -1,10 +1,13 @@
 require 'minitest/autorun'
 require 'dotenv/load'
 require_relative '../lib/esv_passage_fetcher'
+require_relative 'vcr_helper'
 
 # Integration tests that verify ESV API is working
 # These tests make real HTTP requests and can fail if the API is down or if the API key is missing
 class EsvPassageFetcherIntegrationTest < Minitest::Test
+  include VCRTestHelper
+
   def test_api_key_present
     skip "Set INTEGRATION_TESTS=true to run live API tests" unless ENV['INTEGRATION_TESTS']
 
@@ -13,64 +16,60 @@ class EsvPassageFetcherIntegrationTest < Minitest::Test
   end
 
   def test_fetch_psalm_117
-    skip "Set INTEGRATION_TESTS=true to run live API tests" unless ENV['INTEGRATION_TESTS']
-    skip "ESV_API_KEY not set" unless ENV['ESV_API_KEY']
+    use_cassette('esv/test_fetch_psalm_117') do
+      text = EsvPassageFetcher.fetch('Psalm 117')
 
-    text = EsvPassageFetcher.fetch('Psalm 117')
+      refute_nil text, "Expected text to be returned from ESV API"
+      refute_empty text, "Expected non-empty text from ESV API"
 
-    refute_nil text, "Expected text to be returned from ESV API"
-    refute_empty text, "Expected non-empty text from ESV API"
+      # Verify it contains the passage reference
+      assert_includes text, "Psalm 117", "Expected text to include passage reference"
 
-    # Verify it contains the passage reference
-    assert_includes text, "Psalm 117", "Expected text to include passage reference"
-
-    # Verify it contains key words from Psalm 117 (ESV version)
-    assert_includes text.downcase, "praise", "Expected Psalm 117 to contain 'praise'"
-    assert_includes text.downcase, "nations", "Expected Psalm 117 to contain 'nations'"
-    assert_includes text.downcase, "lord", "Expected Psalm 117 to contain 'LORD'"
+      # Verify it contains key words from Psalm 117 (ESV version)
+      assert_includes text.downcase, "praise", "Expected Psalm 117 to contain 'praise'"
+      assert_includes text.downcase, "nations", "Expected Psalm 117 to contain 'nations'"
+      assert_includes text.downcase, "lord", "Expected Psalm 117 to contain 'LORD'"
+    end
   end
 
   def test_fetch_john_3_16
-    skip "Set INTEGRATION_TESTS=true to run live API tests" unless ENV['INTEGRATION_TESTS']
-    skip "ESV_API_KEY not set" unless ENV['ESV_API_KEY']
+    use_cassette('esv/test_fetch_john_3_16') do
+      text = EsvPassageFetcher.fetch('John 3:16')
 
-    text = EsvPassageFetcher.fetch('John 3:16')
+      refute_nil text, "Expected text to be returned from ESV API"
+      refute_empty text, "Expected non-empty text from ESV API"
 
-    refute_nil text, "Expected text to be returned from ESV API"
-    refute_empty text, "Expected non-empty text from ESV API"
+      # Verify it contains the passage reference
+      assert_includes text, "John 3:16", "Expected text to include passage reference"
 
-    # Verify it contains the passage reference
-    assert_includes text, "John 3:16", "Expected text to include passage reference"
-
-    # Verify it contains key words from John 3:16
-    assert_includes text.downcase, "god", "Expected John 3:16 to contain 'God'"
-    assert_includes text.downcase, "world", "Expected John 3:16 to contain 'world'"
-    assert_includes text.downcase, "son", "Expected John 3:16 to contain 'son'"
+      # Verify it contains key words from John 3:16
+      assert_includes text.downcase, "god", "Expected John 3:16 to contain 'God'"
+      assert_includes text.downcase, "world", "Expected John 3:16 to contain 'world'"
+      assert_includes text.downcase, "son", "Expected John 3:16 to contain 'son'"
+    end
   end
 
   def test_fetch_with_verse_numbers
-    skip "Set INTEGRATION_TESTS=true to run live API tests" unless ENV['INTEGRATION_TESTS']
-    skip "ESV_API_KEY not set" unless ENV['ESV_API_KEY']
+    use_cassette('esv/test_fetch_with_verse_numbers') do
+      text = EsvPassageFetcher.fetch('Psalm 23:1-2', verse_numbers: true)
 
-    text = EsvPassageFetcher.fetch('Psalm 23:1-2', verse_numbers: true)
+      refute_nil text, "Expected text to be returned from ESV API"
+      refute_empty text, "Expected non-empty text from ESV API"
 
-    refute_nil text, "Expected text to be returned from ESV API"
-    refute_empty text, "Expected non-empty text from ESV API"
-
-    # ESV API includes verse numbers in [1] format
-    assert_includes text, "[1]", "Expected text to include verse number [1]"
+      # ESV API includes verse numbers in [1] format
+      assert_includes text, "[1]", "Expected text to include verse number [1]"
+    end
   end
 
   def test_api_availability
-    skip "Set INTEGRATION_TESTS=true to run live API tests" unless ENV['INTEGRATION_TESTS']
-    skip "ESV_API_KEY not set" unless ENV['ESV_API_KEY']
+    use_cassette('esv/test_api_availability') do
+      # Test that we can reach the ESV API
+      fetcher = EsvPassageFetcher.new('Genesis 1:1')
 
-    # Test that we can reach the ESV API
-    fetcher = EsvPassageFetcher.new('Genesis 1:1')
-
-    fetcher.fetch
-    fetcher.clean
-    refute_nil fetcher.text, "Expected API to return some response"
+      fetcher.fetch
+      fetcher.clean
+      refute_nil fetcher.text, "Expected API to return some response"
+    end
   end
 
   def test_handles_missing_api_key_gracefully
