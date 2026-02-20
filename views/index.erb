@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>AnkiVerse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script>
     $(function() {
@@ -23,12 +24,99 @@
   </script>
 
   <style>
-    textarea { font-family: sans-serif; }
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      background: #f8f9fa;
+      color: #2c3e50;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: #1a1a2e;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #6c757d;
+      margin: 0 0 1.5rem;
+    }
+
+    h2 a { color: #4a6fa5; text-decoration: none; }
+    h2 a:hover { text-decoration: underline; }
+
+    textarea {
+      font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+      font-size: 0.875rem;
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      background: #fff;
+      resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: #4a6fa5; box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15); }
+
     td { vertical-align: top; }
-    #bible_form { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; }
-    td + td { font-size: smaller; color: #999; padding: 1ex; }
-    td > div { margin: 1em 0; }
-    input[name="lines[]"] { width: 2em; }
+    td + td { font-size: 0.85rem; color: #6c757d; padding: 0.5rem 1rem; }
+    td > div { margin: 0.75rem 0; }
+
+    input[name="lines[]"] { width: 3em; }
+
+    input[type="text"], input[name="lines[]"] {
+      padding: 0.4rem 0.5rem;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+    input[type="text"]:focus, input[name="lines[]"]:focus {
+      outline: none;
+      border-color: #4a6fa5;
+      box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+    }
+
+    input[type="submit"] {
+      background: #4a6fa5;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    input[type="submit"]:hover { background: #3d5d8a; }
+    input[type="submit"]:active { background: #2e4a6e; }
+
+    label { cursor: pointer; }
+
+    #add_field {
+      color: #4a6fa5;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    #add_field:hover { text-decoration: underline; }
+
+    #bible_form {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #dee2e6;
+    }
+    #bible_form label { margin-right: 0.75rem; }
+    #bible_form br { margin-bottom: 0.5rem; }
+    #bible_form input[type="text"] { margin-right: 0.5rem; }
+
+    p a { color: #4a6fa5; text-decoration: none; font-size: 0.85rem; }
+    p a:hover { text-decoration: underline; }
   </style>
 </head>
 
