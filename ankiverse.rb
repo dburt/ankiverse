@@ -16,6 +16,12 @@ require_relative 'lib/sentence_splitter'
 
 class AnkiVerse < Sinatra::Base
 
+  set :host_authorization, permitted_hosts: [
+    'ankiverse.burt.id.au',
+    'www.ankiverse.burt.id.au',
+    /\.run\.app\z/,
+  ]
+
   SUGGESTED_PASSAGES = File.read('suggested_passages.txt').lines.map(&:strip)
 
   get '/' do
